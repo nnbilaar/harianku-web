@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Harianku</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main class="container">
+    <header class="hero">
+      <div class="hero-main">
+        <p id="date" class="date"></p>
+        <h1 id="greeting-text">Selamat pagi</h1>
+        <p id="quote" class="quote"></p>
+        <form id="name-form" class="inline-form" hidden>
+          <input type="text" id="name-input" placeholder="Siapa namamu?" maxlength="30" aria-label="Nama kamu">
+          <button class="btn btn-primary" type="submit">Simpan nama</button>
+        </form>
+      </div>
+      <div class="hero-side">
+        <div id="clock" class="clock">00:00:00</div>
+        <div class="hero-tools">
+          <button id="name-btn" class="btn btn-glass" type="button">Tambah nama</button>
+          <button id="theme-toggle" class="btn btn-glass" type="button" aria-label="Ganti tema">🌙</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="layout">
+      <div class="col">
+        <section class="card">
+          <div class="card-head">
+            <h2>Tugas</h2>
+            <span id="task-count" class="muted"></span>
+          </div>
+          <div class="progress"><div id="progress-bar"></div></div>
+          <form id="task-form" class="task-form">
+            <input type="text" id="task-input" placeholder="Coba: beli buku !tinggi besok" maxlength="100" required aria-label="Tugas baru">
+            <select id="task-pri" aria-label="Prioritas">
+              <option value="h">Tinggi</option><option value="m" selected>Sedang</option><option value="l">Rendah</option>
+            </select>
+            <input type="date" id="task-due" aria-label="Tenggat">
+            <button type="submit" class="btn btn-primary">Tambah</button>
+          </form>
+          <p id="task-error" class="error" role="alert"></p>
+          <div class="toolbar">
+            <div class="seg" id="filters">
+              <button class="on" data-filter="all" type="button">Semua</button>
+              <button data-filter="active" type="button">Aktif</button>
+              <button data-filter="done" type="button">Selesai</button>
+            </div>
+            <input type="search" id="task-search" placeholder="Cari tugas…" aria-label="Cari tugas">
+            <button id="clear-done" class="btn btn-small" type="button" hidden>Hapus yang selesai</button>
+          </div>
+          <ul id="task-list" class="task-list"></ul>
+        </section>
+
+        <section class="card">
+          <div class="card-head"><h2>Link cepat</h2></div>
+          <form id="link-form" class="inline-form">
+            <input type="text" id="link-name" placeholder="Nama" maxlength="20" required aria-label="Nama link">
+            <input type="text" id="link-url" placeholder="alamat.com" required aria-label="URL">
+            <button type="submit" class="btn btn-primary">Tambah</button>
+          </form>
+          <div id="link-list" class="link-list"></div>
+        </section>
+      </div>
+
+      <div class="col">
+        <section class="card" id="timer-card">
+          <div class="card-head"><h2>Timer fokus</h2><button id="focus-mode" class="btn btn-small" type="button">Layar penuh</button></div>
+          <div class="seg center" id="modes">
+            <button data-mode="focus" type="button">Fokus 25</button>
+            <button data-mode="short" type="button">Istirahat 5</button>
+            <button data-mode="long" type="button">Panjang 15</button>
+          </div>
+          <div class="ring">
+            <svg viewBox="0 0 120 120" aria-hidden="true"><circle class="ring-bg" cx="60" cy="60" r="54"/><circle id="ring" class="ring-fg" cx="60" cy="60" r="54"/></svg>
+            <div id="timer" class="timer" role="timer">25:00</div>
+          </div>
+          <p id="timer-task" class="muted center-text"></p>
+          <div class="btn-row">
+            <button id="t-minus" class="btn btn-step" type="button" aria-label="Kurangi 5 menit">−5</button>
+            <button id="timer-start" class="btn btn-primary" type="button">Mulai</button>
+            <button id="t-plus" class="btn btn-step" type="button" aria-label="Tambah 5 menit">+5</button>
+            <button id="timer-reset" class="btn" type="button">Reset</button>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="card-head"><h2>Progres hari ini</h2><span id="streak" class="muted"></span></div>
+          <div class="stats">
+            <div><b id="st-pomos">0</b><span>sesi fokus</span></div>
+            <div><b id="st-min">0</b><span>menit</span></div>
+            <div><b id="st-done">0</b><span>tugas selesai</span></div>
+          </div>
+          <div id="chart" class="chart" aria-label="Menit fokus 7 hari terakhir"></div>
+        </section>
+
+        <section class="card">
+          <div class="card-head"><h2>Catatan cepat</h2><span id="note-status" class="muted"></span></div>
+          <textarea id="notes" placeholder="Tulis apa saja, tersimpan otomatis…" aria-label="Catatan"></textarea>
+        </section>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <span>Pintasan: <kbd>/</kbd> tugas baru · <kbd>s</kbd> mulai/jeda · <kbd>d</kbd> ganti tema · <kbd>f</kbd> layar penuh</span>
+      <span>
+        <button id="export" class="btn btn-small" type="button">Ekspor data</button>
+        <button id="import" class="btn btn-small" type="button">Impor data</button>
+        <input type="file" id="import-file" accept="application/json" hidden>
+      </span>
+    </footer>
+  </main>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="js/script.js"></script>
+</body>
+</html>
